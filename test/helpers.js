@@ -3,7 +3,10 @@ require('babel-register')();
 var jsdom = require('jsdom').jsdom;
 
 var exposedProperties = ['window', 'navigator', 'document'];
-
+global.requestAnimationFrame = function(callback) {
+  setTimeout(callback, 0);
+  };
+  
 global.document = jsdom('<div id="global"></div>');
 global.window = document.defaultView;
 Object.keys(document.defaultView).forEach((property) => {
